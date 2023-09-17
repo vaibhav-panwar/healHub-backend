@@ -3,14 +3,18 @@ const cors = require("cors");
 require('dotenv').config();
 
 const app = express();
-
+const corsOptions ={
+    origin:'*', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200,
+}
 
 app.use(express.json());
-app.use(cors());
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    next();
-  });
+app.use(cors(corsOptions));
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     next();
+//   });
 
 const { connect } = require("./db/mongodb");
 const { userRouter } = require("./routes/user.routes");
