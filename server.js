@@ -7,6 +7,10 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+  });
 
 const { connect } = require("./db/mongodb");
 const { userRouter } = require("./routes/user.routes");
